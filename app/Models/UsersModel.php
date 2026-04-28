@@ -9,6 +9,9 @@ class UsersModel extends Model
     protected $primaryKey = 'id_users';
     protected $allowedFields = ['username', 'email', 'password'];
 
+    protected $beforeInsert = ['hashPassword'];
+    protected $beforeUpdate = ['hashPassword'];
+
     protected $validationRules = [
         'username' => 'required|min_length[3]|max_length[50]',
         'email'    => 'required|valid_email|is_unique[users.email]',
@@ -35,5 +38,25 @@ class UsersModel extends Model
             'matches' => 'La confirmation du mot de passe ne correspond pas.',
         ],
     ];
+
+    protected function hashPassword(array $data): array
+    {
+        if (! isset($data['data']) || ! is_array($data['data'])) {
+            return $data;
+        }
+
+        if (array_key_exists('password_confirm', $data['data'])) {
+            unset($data['data']['password_confirm']);
+        }
+
+        if (isset($data['data']['password']) && $data['data']['password'] !== '') {
+            $info = password_get_info($data['data']['password']);
+            if (($info['algo'] ?? 0) === 0) {
+                $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
+            }
+        }
+
+        return $data;
+    }
 
 }

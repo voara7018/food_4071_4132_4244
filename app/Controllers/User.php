@@ -19,7 +19,7 @@ class User extends BaseController
     {
         $model = new UsersModel();
 
-        $data =$this->request->getPost();
+        $data = $this->request->getPost();
         if(!$model->insert($data)){
             return view('register', ['validation' => $model->errors()]);
         }
