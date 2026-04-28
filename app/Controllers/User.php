@@ -23,7 +23,7 @@ class User extends BaseController
         if(!$model->insert($data)){
             return view('register', ['validation' => $model->errors()]);
         }
-        return redirect('/');
+        return view('login');
 
     }
 
