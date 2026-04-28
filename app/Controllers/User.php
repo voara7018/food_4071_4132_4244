@@ -39,7 +39,9 @@ class User extends BaseController
         if ($user && password_verify($password, $user['password'])) {
             return redirect()->to('/home');
         } else {
-            return redirect()->back()->withInput()->with('error', 'Email ou mot de passe incorrect.');
+            return view('login', [
+                'validation' => ['email' => 'Email ou mot de passe incorrect.'
+            ]]);
         }
     }
 
