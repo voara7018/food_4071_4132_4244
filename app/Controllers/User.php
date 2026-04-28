@@ -19,17 +19,12 @@ class User extends BaseController
     {
         $model = new UsersModel();
 
-        $data = [
-            'username' => $this->request->getVar('username'),
-            'email'    => $this->request->getVar('email'),
-            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-        ];
-
-        if ($model->insert($data)) {
-            return redirect()->to('/home');
-        } else {
-            return redirect()->back()->withInput()->with('errors', $model->errors());
+        $data =$this->request->getPost();
+        if(!$model->insert($data)){
+            return view('register', ['validation' => $model->errors()]);
         }
+        return redirect('/');
+
     }
 
     public function loginUser()

@@ -13,6 +13,7 @@ class UsersModel extends Model
         'username' => 'required|min_length[3]|max_length[50]',
         'email'    => 'required|valid_email|is_unique[users.email]',
         'password' => 'required|min_length[8]',
+        'password_confirm' => 'required|matches[password]',
     ];
 
     protected $validationMessages = [
@@ -29,6 +30,9 @@ class UsersModel extends Model
         'password' => [
             'required' => 'Le mot de passe est requis.',
             'min_length' => 'Le mot de passe doit contenir au moins 8 caractères.',
+        ],
+        'password_confirm' => [
+            'matches' => 'La confirmation du mot de passe ne correspond pas.',
         ],
     ];
 
