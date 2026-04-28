@@ -31,18 +31,16 @@ class User extends BaseController
     {
         $model = new UsersModel();
 
-        $data =$this->request->getPost();
-
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
         $user = $model->where('email', $email)->first();
 
         if ($user && password_verify($password, $user['password'])) {
-            return redirect()->to('/home');
-        } else {    
-            return view('login', ['validation' => $model->errors()]);
-        }
+            return view('home');
+        }   
+        return view('login', ['validation' => $model->errors()]);
+    
     }
 
 }
