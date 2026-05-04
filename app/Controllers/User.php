@@ -10,6 +10,12 @@ class User extends BaseController
         return view('login');
     }
 
+    public function logoutUser()
+    {
+        session()->destroy();
+        return redirect()->to('/');
+    }
+
     public function showregister()
     {
         return view('register');
@@ -37,7 +43,12 @@ class User extends BaseController
         $user = $model->where('email', $email)->first();
 
         if ($user && password_verify($password, $user['password'])) {
-            return view('home');
+            session()->set([
+                'logged_in' => true,
+                'user_id'   => $user['id_users'] ?? null,
+                'email'     => $user['email'] ?? null,
+            ]);
+            return redirect()->to('/home');
         }   
         return view('login', ['validation' => $model->errors()]);
     
