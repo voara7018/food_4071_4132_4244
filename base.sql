@@ -1,4 +1,7 @@
-CREATE DATABASE foodswipe;
+SET NAMES 'utf8mb4';
+SET CHARACTER SET utf8mb4;
+
+CREATE DATABASE foodswipe CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE foodswipe;
 
 CREATE TABLE users (
@@ -7,12 +10,12 @@ CREATE TABLE users (
     email VARCHAR(255),
     password VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(50) NOT NULL
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE plats (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -26,20 +29,14 @@ CREATE TABLE plats (
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_category FOREIGN KEY (id_category) REFERENCES categories(id) ON DELETE SET NULL
-);
-INSERT INTO categories (id, nom) VALUES
-(1, 'Japonais'),
-(2, 'Italien'),
-(3, 'Mexicain'),
-(4, 'Thaïlandais'),
-(5, 'Américain'),
-(6, 'Oriental'),
-(7, 'Français'),
-(8, 'Indien'),
-(9, 'Hawaïen'),
-(10, 'Maghrébin'),
-(11, 'Dessert');
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+INSERT INTO categories (id, nom) VALUES
+(1, 'Japonais'), (2, 'Italien'), (3, 'Mexicain'), (4, 'Thaïlandais'),
+(5, 'Américain'), (6, 'Oriental'), (7, 'Français'), (8, 'Indien'),
+(9, 'Hawaïen'), (10, 'Maghrébin'), (11, 'Dessert');
+
+SET NAMES utf8mb4;
 INSERT INTO plats (id, nom, emoji, image, id_category, time, calorie, rating, description) VALUES
 (1, 'Ramen Tonkotsu', '🍜', 'ramen.jpg', 1, 45, 620, 5, 'Bouillon de porc riche, nouilles fraîches, œuf mollet et chashu.'),
 (2, 'Pizza Margherita', '🍕', 'pizza.jpg', 2, 30, 540, 5, 'Tomate San Marzano, mozzarella di bufala, basilic frais.'),

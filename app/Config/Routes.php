@@ -13,4 +13,5 @@ $routes->get('/register', 'User::showregister');
 $routes->post('/register', 'User::insertUser');
 $routes->get('/home', 'Home::getPlats');
 
-
+$routes->get('/food/show', 'Home::add');
+$routes->post('/food/store', 'Home::store');

@@ -45,7 +45,7 @@
     <a href="/home" class="active">
       <span class="nav-icon">🔥</span>Découvrir
     </a>
-    <a href="/add-food">
+    <a href="<?= base_url('food/show') ?>" class="active">
       <span class="nav-icon">➕</span>Ajouter
     </a>
     <a href="/stats">
@@ -60,11 +60,11 @@
   const ALL_FOODS = <?php
     $foods = [];
     foreach (($plats ?? []) as $p) {
-      $id = $p['id_plats'] ?? ($p['id'] ?? null);
+      $id = $p['id'] ?? ($p['id'] ?? null);
       $nom = $p['nom'] ?? ($p['name'] ?? '');
       $emoji = $p['emoji'] ?? '🍽️';
       $img = $p['image'] ?? ($p['img'] ?? null);
-      $cat = $p['id_categorie'] ?? ($p['cat'] ?? '');
+      $cat = $p['cat'] ?? '';
       $time = $p['time'] ?? '';
       $calorie = $p['calorie'] ?? ($p['cal'] ?? '');
       $rating = $p['rating'] ?? '0.0';
